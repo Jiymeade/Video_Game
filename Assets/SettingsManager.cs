@@ -26,15 +26,17 @@ public class SettingsManager : MonoBehaviour
         audioMixer.SetFloat("SFXVolume", sfxVolume.value);
     }
 
+    public void PlayTestSound(Slider slider)
+    {
+        // Play a test sound
+        Debug.Log($"{slider.name} value: {slider.value}");
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        masterVolume.onValueChanged.AddListener(delegate {PlayTestSound(masterVolume);});
+        musicVolume.onValueChanged.AddListener(delegate {PlayTestSound(musicVolume);});
+        sfxVolume.onValueChanged.AddListener(delegate {PlayTestSound(sfxVolume);});
     }
 }
