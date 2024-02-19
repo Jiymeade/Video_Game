@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      trees-and-bushes_0: 5410142459291506720
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
