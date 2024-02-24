@@ -10,6 +10,8 @@ public class SettingsManager : MonoBehaviour
 
     public Slider masterVolume, musicVolume, sfxVolume;
     public AudioMixer audioMixer;
+    public AudioSource musicSource, sfxSource;
+    public AudioClip musicClip, sfxClip;
 
     public void SetMasterVolume(float volume)
     {
@@ -28,8 +30,21 @@ public class SettingsManager : MonoBehaviour
 
     public void PlayTestSound(Slider slider)
     {
-        // Play a test sound
         Debug.Log($"{slider.name} value: {slider.value}");
+        if (slider.name == "MasterVolume")
+        {
+            audioMixer.SetFloat("MasterVolume", slider.value);
+        }
+        else if (slider.name == "MusicVolume")
+        {
+            audioMixer.SetFloat("MusicVolume", slider.value);
+            musicSource.PlayOneShot(musicClip);
+        }
+        else if (slider.name == "SFXVolume")
+        {
+            audioMixer.SetFloat("SFXVolume", slider.value);
+            sfxSource.PlayOneShot(sfxClip);
+        }
     }
 
     // Start is called before the first frame update

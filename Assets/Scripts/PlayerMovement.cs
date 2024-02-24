@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public int speed = 10;
+    public float speed = 2f;
     private Rigidbody2D characterBody;
     private Vector2 velocity;
     private Vector2 inputMovement;
@@ -19,16 +19,22 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        inputMovement = new Vector2(
-            Input.GetAxisRaw("Horizontal"),
-            Input.GetAxisRaw("Vertical")
-        );
+        ProcessInputs();
     }
 
     private void FixedUpdate()
     {
-        Vector2 delta = inputMovement * velocity * Time.deltaTime;
-        Vector2 newPosition = characterBody.position + delta;
-        characterBody.MovePosition(newPosition);
+        Move();
+    }
+
+    void ProcessInputs() {
+        float moveX = Input.GetAxisRaw("Horizontal");
+        float moveY = Input.GetAxisRaw("Vertical");
+
+        inputMovement = new Vector2(moveX, moveY).normalized;
+    }
+
+    void Move() {
+        characterBody.velocity = new Vector2(inputMovement.x * speed, inputMovement.y * speed);
     }
 }
